@@ -15,6 +15,9 @@ import {
   MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef,
   MatTable
 } from '@angular/material/table';
+import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, switchMap, catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'mitterlehner-stops',
@@ -56,31 +59,51 @@ import {
   `]
 })
 export class StopsComponent {
-  searchType: 'name' | 'location' = 'name'; // Standard: Suche nach Name
+  private _searchType: 'name' | 'location' = 'name';
+
+  get searchType(): 'name' | 'location' {
+    return this._searchType;
+  }
+
+  set searchType(value: 'name' | 'location') {
+    this._searchType = value;
+    this.nameQuery = '';
+    this.stops = []; // Stops leeren, wenn der Suchtyp geändert wird
+  }
+
   nameQuery: string = '';
   latitude: number | null = null;
   longitude: number | null = null;
   stops: Stop[] = [];
   displayedColumns: string[] = ['stopName', 'latitude', 'longitude']
 
-  constructor(private stopsService: StopsService) { }
+  private searchSubject = new Subject<string>();
+
+  constructor(private stopsService: StopsService) {
+    // Vorschlagssuche
+    this.searchSubject.pipe(
+      debounceTime(300), // 300ms Verzögerung
+      distinctUntilChanged(), // Ignoriere gleiche Eingaben
+      switchMap((query) =>
+        query.trim()
+          ? this.stopsService.searchByName(query).pipe(catchError(() => of([])))
+          : of([])
+      )
+    ).subscribe((results) => {
+      this.stops = results;
+    });
+  }
+
+  onNameInput(event: Event) {
+    const input = event.target as HTMLInputElement;
+    this.searchSubject.next(input.value); // Vorschlagssuche triggern
+  }
 
   searchStops() {
-    if (this.searchType === 'name' && this.nameQuery.trim() !== '') {
-      this.stopsService.searchByName(this.nameQuery).subscribe({
-        next: (results) => {
-          this.stops = results;
-          console.log('Suchergebnisse:', this.stops);
-        },
-        error: (err) => {
-          console.error('Fehler bei der Suche:', err);
-        },
-      });
-    } else if (this.searchType === 'location' && this.latitude !== null && this.longitude !== null) {
+    if (this.searchType === 'location' && this.latitude !== null && this.longitude !== null) {
       this.stopsService.searchByLocation(this.latitude, this.longitude).subscribe({
         next: (results) => {
           this.stops = results;
-          console.log('Suchergebnisse:', this.stops);
         },
         error: (err) => {
           console.error('Fehler bei der Suche:', err);
