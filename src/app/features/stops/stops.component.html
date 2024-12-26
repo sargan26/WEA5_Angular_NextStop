@@ -1,0 +1,61 @@
+<div class="container">
+  <h2>Haltestellenabfrage</h2>
+  <form class="search-form">
+    <mat-radio-group [(ngModel)]="searchType" name="searchType" class="radio-group">
+      <mat-radio-button value="name">Nach Name suchen</mat-radio-button>
+      <mat-radio-button value="location">Nach Standort suchen</mat-radio-button>
+    </mat-radio-group>
+
+    <div *ngIf="searchType === 'name'" class="field">
+      <mat-form-field appearance="fill">
+        <mat-label>Haltestellenname</mat-label>
+        <input matInput type="text" [(ngModel)]="nameQuery" name="nameQuery" placeholder="z. B. Hauptbahnhof">
+      </mat-form-field>
+    </div>
+
+    <div *ngIf="searchType === 'location'" class="field">
+      <mat-form-field appearance="fill">
+        <mat-label>Breitengrad (Latitude)</mat-label>
+        <input matInput type="number" [(ngModel)]="latitude" name="latitude" placeholder="48.368">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Längengrad (Longitude)</mat-label>
+        <input matInput type="number" [(ngModel)]="longitude" name="longitude" placeholder="14.512">
+      </mat-form-field>
+    </div>
+
+    <button mat-raised-button color="primary" type="button" (click)="searchStops()">Suchen</button>
+  </form>
+
+  <div *ngIf="stops.length > 0" class="results">
+    <table mat-table [dataSource]="stops" class="mat-elevation-z8">
+      <!-- Stop Name Column -->
+      <ng-container matColumnDef="stopName">
+        <th mat-header-cell *matHeaderCellDef> Haltestellenname </th>
+        <td mat-cell *matCellDef="let stop"> {{ stop.stopName }} </td>
+      </ng-container>
+
+      <!-- Latitude Column -->
+      <ng-container matColumnDef="latitude">
+        <th mat-header-cell *matHeaderCellDef> Breitengrad </th>
+        <td mat-cell *matCellDef="let stop"> {{ stop.latitude }} </td>
+      </ng-container>
+
+      <!-- Longitude Column -->
+      <ng-container matColumnDef="longitude">
+        <th mat-header-cell *matHeaderCellDef> Längengrad </th>
+        <td mat-cell *matCellDef="let stop"> {{ stop.longitude }} </td>
+      </ng-container>
+
+      <!-- Header and Row Definitions -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+  <div *ngIf="stops.length === 0 &&
+  (searchType === 'name' && nameQuery)
+  || (searchType === 'location' && latitude && longitude)">
+    <p>Keine Haltestellen gefunden.</p>
+  </div>
+</div>

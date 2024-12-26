@@ -1,0 +1,33 @@
+/*!* You can add global styles to this file, and also import other style files *!*/
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Side bar config */
+.sidenav-container {
+  height: 100vh;
+}
+
+mat-sidenav {
+  width: 250px;
+}
+
+.content {
+  padding: 16px;
+}
+
+mat-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Section headers of sidebar */
+.section-header {
+  text-decoration: underline; /* Unterstreicht den Text */
+  font-weight: bold;          /* Optional: Hebt die Überschrift hervor */
+  margin-top: 16px;           /* Optional: Abstand zum vorherigen Element */
+  margin-bottom: 8px;         /* Optional: Abstand zu den darunterliegenden Elementen */
+  font-size: 1.1rem;          /* Optional: Größe der Schrift */
+}
+

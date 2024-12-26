@@ -1,0 +1,35 @@
+<mat-sidenav-container class="sidenav-container">
+  <!-- Sidebar -->
+  <mat-sidenav #sidenav mode="side" opened>
+    <mat-nav-list>
+      <!-- Allgemein -->
+      <div mat-subheader class="section-header">Allgemein</div>
+      <a mat-list-item routerLink="/timetable">Fahrplanabfrage</a>
+      <a mat-list-item routerLink="/stops">Haltestellen</a>
+      <a mat-list-item routerLink="/dashboard">Anzeigetafel</a>
+
+      <!-- Admin (nur sichtbar für Admins) -->
+      <ng-container *ngIf="isAdmin">
+        <div mat-subheader class="section-header">Admin</div>
+        <a mat-list-item routerLink="/admin/stops">Haltestellen</a>
+        <a mat-list-item routerLink="/admin/routes">Routen</a>
+        <a mat-list-item routerLink="/admin/holidays">Feiertage</a>
+        <a mat-list-item routerLink="/admin/statistics">Statistiken</a>
+      </ng-container>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <!-- Hauptinhalt -->
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button mat-icon-button (click)="toggleSidenav(sidenav)">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>{{ title }} - {{ pageTitle }}</span>
+    </mat-toolbar>
+
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
