@@ -1,0 +1,47 @@
+.container {
+  margin: 20px;
+}
+
+.form-actions {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+
+
+.field {
+  margin-bottom: 20px;
+  width: 100%; /* Ensures fields take full width */
+}
+
+.search-field {
+  margin-top: 40px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+mat-error {
+  white-space: normal; /* Allows text wrapping */
+  line-height: 1.5; /* Improves readability for multi-line errors */
+  word-wrap: break-word; /* Breaks long words */
+  font-size: 0.85rem; /* Adjust font size if needed */
+}
+
+/* Selected row */
+.selected {
+  background-color: rgba(0, 0, 255, 0.1); /* Light blue background */
+}
+
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+}
+
+.success-message {
+  color: green;
+  margin-top: 10px;
+}

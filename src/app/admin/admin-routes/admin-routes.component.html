@@ -1,1 +1,78 @@
-<p>admin-routes works!</p>
+<div class="container">
+  <h2>Routen erstellen</h2>
+
+  <form [formGroup]="routeForm" (ngSubmit)="onSubmit()">
+    <!-- Route Details -->
+    <mat-form-field appearance="fill">
+      <mat-label>Routen-ID</mat-label>
+      <input matInput formControlName="routeId" placeholder="z. B. A-TH5" />
+      <mat-error *ngIf="routeForm.get('routeId')?.invalid">
+        Routen-ID ist erforderlich.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Routenname</mat-label>
+      <input matInput formControlName="routeName" placeholder="z. B. Abendlinie Thalheim 5" />
+      <mat-error *ngIf="routeForm.get('routeName')?.invalid">
+        Routenname ist erforderlich.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Gültig von</mat-label>
+      <input matInput type="date" formControlName="validFrom" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Gültig bis</mat-label>
+      <input matInput type="date" formControlName="validUntil" />
+    </mat-form-field>
+
+    <!-- Validity Checkboxes -->
+    <div>
+      <mat-checkbox formControlName="validOnWeekday">An Wochentagen</mat-checkbox>
+      <mat-checkbox formControlName="validOnWeekend">Am Wochenende</mat-checkbox>
+      <mat-checkbox formControlName="validOnHoliday">An Feiertagen</mat-checkbox>
+      <mat-checkbox formControlName="validOnSchoolHoliday">In Schulferien</mat-checkbox>
+    </div>
+
+    <!-- Stops -->
+    <div>
+      <h3>Haltestellen hinzufügen</h3>
+      <div *ngFor="let stop of routeStops.controls; let i = index" [formGroupName]="i">
+        <mat-form-field appearance="fill">
+          <mat-label>Haltestellen-ID</mat-label>
+          <input matInput formControlName="stopId" placeholder="z. B. W-KJP" />
+          <mat-error *ngIf="stop.get('stopId')?.invalid">
+            Haltestellen-ID ist erforderlich.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Reihenfolge</mat-label>
+          <input matInput type="number" formControlName="sequenceNumber" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Planmäßige Ankunftszeit</mat-label>
+          <input matInput type="time" formControlName="scheduledRouteStopArrTime" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Planmäßige Abfahrtszeit</mat-label>
+          <input matInput type="time" formControlName="scheduledRouteStopDepTime" />
+        </mat-form-field>
+
+        <button mat-button color="warn" (click)="removeStop(i)">Entfernen</button>
+      </div>
+
+      <button mat-button color="primary" type="button" (click)="addStop()">Haltestelle hinzufügen</button>
+    </div>
+
+    <!-- Submit Button -->
+    <button mat-raised-button color="primary" type="submit" [disabled]="routeForm.invalid">
+      Route erstellen
+    </button>
+  </form>
+</div>

@@ -1,10 +1,10 @@
-import { Component, ViewChild } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {NavigationEnd, Router, RouterLink, RouterOutlet} from '@angular/router';
-import { MatSidenav, MatSidenavContainer, MatSidenavContent } from '@angular/material/sidenav';
+import {MatSidenav, MatSidenavContainer, MatSidenavContent} from '@angular/material/sidenav';
 import {MatListItem, MatListSubheaderCssMatStyler, MatNavList} from '@angular/material/list';
-import { MatToolbar } from '@angular/material/toolbar';
-import { MatIcon } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
+import {MatToolbar} from '@angular/material/toolbar';
+import {MatIcon} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
 import {NgIf} from '@angular/common';
 import {filter} from 'rxjs';
 
@@ -47,13 +47,7 @@ export class AppComponent {
   // Methode zur Aktualisierung des Titels basierend auf der Route
   updatePageTitle() {
     const route = this.router.url;
-    if (route.includes('/timetable')) {
-      this.pageTitle = 'Fahrplanabfrage';
-    } else if (route.includes('/stops')) {
-      this.pageTitle = 'Haltestellen';
-    } else if (route.includes('/dashboard')) {
-      this.pageTitle = 'Anzeigetafel';
-    } else if (route.includes('/admin/stops')) {
+    if (route.includes('/admin/stops')) {
       this.pageTitle = 'Admin Haltestellen';
     } else if (route.includes('/admin/routes')) {
       this.pageTitle = 'Admin Routen';
@@ -61,6 +55,13 @@ export class AppComponent {
       this.pageTitle = 'Admin Feiertage';
     } else if (route.includes('/admin/statistics')) {
       this.pageTitle = 'Admin Statistiken';
+    } else if (route.includes('/timetable')) {
+      this.pageTitle = 'Fahrplanabfrage';
+    } else if (route.includes('/stops')) {
+      this.pageTitle = 'Haltestellen';
+    } else if (route.includes('/dashboard')) {
+      this.pageTitle = 'Anzeigetafel';
+
     } else {
       this.pageTitle = ''; // Fallback
     }

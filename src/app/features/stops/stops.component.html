@@ -22,20 +22,46 @@
     </div>
 
     <!-- Suche nach Standort -->
-    <div *ngIf="searchType === 'location'" class="field">
+    <div *ngIf="searchType === 'location'" class="field" [ngClass]="{ 'invalid-input': isLatitudeValid() }">
+      <!-- Latitude -->
       <mat-form-field appearance="fill">
         <mat-label>Breitengrad (Latitude)</mat-label>
-        <input matInput type="number" [(ngModel)]="latitude" name="latitude" placeholder="48.368">
+        <input
+          matInput
+          type="number"
+          [(ngModel)]="latitude"
+          name="latitude"
+          placeholder="z. B. 48.368"
+        />
+        <div *ngIf="latitudeError" class="error-message">{{ latitudeError }}</div>
       </mat-form-field>
-      <mat-form-field appearance="fill">
+
+      <!-- Longitude -->
+      <mat-form-field appearance="fill" [ngClass]="{ 'invalid-input': isLongitudeValid() }">
         <mat-label>Längengrad (Longitude)</mat-label>
-        <input matInput type="number" [(ngModel)]="longitude" name="longitude" placeholder="14.512">
+        <input
+          matInput
+          type="number"
+          [(ngModel)]="longitude"
+          name="longitude"
+          placeholder="z. B. 14.512"
+        />
+        <div *ngIf="longitudeError" class="error-message">{{ longitudeError }}</div>
       </mat-form-field>
     </div>
 
-    <button *ngIf="searchType === 'location'" mat-raised-button color="primary" type="button" (click)="searchStops()">
+    <!-- Suchen-Button -->
+    <button
+      *ngIf="searchType === 'location'"
+      mat-raised-button
+      color="primary"
+      type="button"
+      (click)="searchStops()"
+      [disabled]="!isLocationValid()"
+    >
       Suchen
     </button>
+
   </form>
 
   <!-- Ergebnisse -->

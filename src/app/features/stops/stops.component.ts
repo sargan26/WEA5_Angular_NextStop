@@ -4,8 +4,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
-import { NgIf } from '@angular/common';
-import { StopsService, Stop } from '../../services/stops.service';
+import { NgClass, NgIf} from '@angular/common';
+import { StopsService, Stop } from '../../services/stops/stops.service';
 import {
   MatCell,
   MatCellDef,
@@ -38,7 +38,8 @@ import { of } from 'rxjs';
     MatHeaderRow,
     MatRow,
     MatRowDef,
-    MatHeaderRowDef
+    MatHeaderRowDef,
+    NgClass
   ],
   templateUrl: './stops.component.html',
   styles: [`
@@ -56,6 +57,14 @@ import { of } from 'rxjs';
     .search-form button {
       margin-bottom: 20px; /* Abstand zum nächsten Element */
     }
+    .invalid-input .mat-form-field-wrapper {
+      border: 1px solid red;
+    }
+    .error-message {
+      color: red;
+      font-size: 0.9em;
+      margin-top: 5px;
+    }
   `]
 })
 export class StopsComponent {
@@ -71,11 +80,31 @@ export class StopsComponent {
     this.stops = []; // Stops leeren, wenn der Suchtyp geändert wird
   }
 
+  get latitudeError(): string | null {
+    if (this.latitude !== null && (this.latitude < -90 || this.latitude > 90)) {
+      return 'Breitengrad muss zwischen -90 und 90 liegen.';
+    }
+    return null;
+  }
+
+  get longitudeError(): string | null {
+    if (this.longitude !== null && (this.longitude < -180 || this.longitude > 180)) {
+      return 'Längengrad muss zwischen -180 und 180 liegen.';
+    }
+    return null;
+  }
+
+  get isFormInvalid(): boolean {
+    return !!this.latitudeError || !!this.longitudeError;
+  }
+
   nameQuery: string = '';
+  errorMessage: string | null = null;
   latitude: number | null = null;
   longitude: number | null = null;
   stops: Stop[] = [];
   displayedColumns: string[] = ['stopName', 'latitude', 'longitude']
+
 
   private searchSubject = new Subject<string>();
 
@@ -113,4 +142,17 @@ export class StopsComponent {
       console.error('Ungültige Eingaben.');
     }
   }
+
+  isLatitudeValid(): boolean {
+    return this.latitude !== null && this.latitude >= -90 && this.latitude <= 90;
+  }
+
+  isLongitudeValid(): boolean {
+    return this.longitude !== null && this.longitude >= -180 && this.longitude <= 180;
+  }
+
+  isLocationValid(): boolean {
+    return this.isLatitudeValid() && this.isLongitudeValid();
+  }
+
 }
