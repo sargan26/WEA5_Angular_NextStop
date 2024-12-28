@@ -29,6 +29,11 @@
       <input matInput type="date" formControlName="validUntil" />
     </mat-form-field>
 
+    <!-- Fehlermeldung -->
+    <p *ngIf="routeForm.hasError('invalidDateRange')" class="error">
+      Das Startdatum muss vor dem Enddatum liegen.
+    </p>
+
     <!-- Validity Checkboxes -->
     <div>
       <mat-checkbox formControlName="validOnWeekday">An Wochentagen</mat-checkbox>
@@ -37,8 +42,23 @@
       <mat-checkbox formControlName="validOnSchoolHoliday">In Schulferien</mat-checkbox>
     </div>
 
+    <mat-form-field appearance="fill">
+      <mat-label>Fahrzeug</mat-label>
+      <input matInput type="number" formControlName="vin" placeholder="z. B. 1"/>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Abfahrtszeit</mat-label>
+      <input matInput type="time" formControlName="scheduledRouteDepTime" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Ankunftszeit</mat-label>
+      <input matInput type="time" formControlName="scheduledRouteArrTime" />
+    </mat-form-field>
+
     <!-- Stops -->
-    <div>
+    <div formArrayName="routeStops">
       <h3>Haltestellen hinzufügen</h3>
       <div *ngFor="let stop of routeStops.controls; let i = index" [formGroupName]="i">
         <mat-form-field appearance="fill">
@@ -51,7 +71,10 @@
 
         <mat-form-field appearance="fill">
           <mat-label>Reihenfolge</mat-label>
-          <input matInput type="number" formControlName="sequenceNumber" />
+          <input matInput type="number" formControlName="sequenceNumber" placeholder="z. B. 1"/>
+          <mat-error *ngIf="stop.get('sequenceNumber')?.invalid">
+            Muss größer 0 sein.
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
@@ -74,5 +97,9 @@
     <button mat-raised-button color="primary" type="submit" [disabled]="routeForm.invalid">
       Route erstellen
     </button>
+
+    <!-- Erfolg- und Fehlermeldungen -->
+    <p *ngIf="successMessage" class="success">{{ successMessage }}</p>
+    <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
   </form>
 </div>
