@@ -42,30 +42,7 @@ import { of } from 'rxjs';
     NgClass
   ],
   templateUrl: './stops.component.html',
-  styles: [`
-    .container {
-      margin: 10px;
-    }
-    .radio-group {
-      margin-bottom: 10px;
-      display: flex;
-      gap: 10px;
-    }
-    .field {
-      margin-bottom: 10px;
-    }
-    .search-form button {
-      margin-bottom: 20px; /* Abstand zum nächsten Element */
-    }
-    .invalid-input .mat-form-field-wrapper {
-      border: 1px solid red;
-    }
-    .error-message {
-      color: red;
-      font-size: 0.9em;
-      margin-top: 5px;
-    }
-  `]
+  styleUrls: ['./stops.component.css']
 })
 export class StopsComponent {
   private _searchType: 'name' | 'location' = 'name';

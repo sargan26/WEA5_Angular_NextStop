@@ -1,1 +1,115 @@
-<p>admin-statistics works!</p>
+<div class="container">
+  <h2>Verspätungsstatistik</h2>
+
+  <!-- Suchformular -->
+  <form [formGroup]="statisticsForm" (ngSubmit)="onSearch()">
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Startdatum</mat-label>
+        <input matInput type="date" formControlName="startDate" />
+        <mat-error *ngIf="statisticsForm.get('startDate')?.invalid">
+          Startdatum ist erforderlich.
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Enddatum</mat-label>
+        <input matInput type="date" formControlName="endDate" />
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Routen-ID (optional)</mat-label>
+        <input matInput formControlName="routeID" placeholder="z. B. A1-NM" />
+      </mat-form-field>
+    </div>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="statisticsForm.invalid">
+      Suchen
+    </button>
+  </form>
+
+  <!-- Ergebnis-Tabelle -->
+  <div *ngIf="statistics.length > 0" class="results">
+    <table mat-table [dataSource]="statistics" class="mat-elevation-z8">
+      <!-- Route ID -->
+      <ng-container matColumnDef="routeID">
+        <th mat-header-cell *matHeaderCellDef> Route </th>
+        <td mat-cell *matCellDef="let stat"> {{ stat.routeID }} </td>
+      </ng-container>
+
+      <!-- Durchschnittliche Verspätung -->
+      <ng-container matColumnDef="avgDelay">
+        <th mat-header-cell *matHeaderCellDef> Durchschnittliche Verspätung (Sekunden) </th>
+        <td mat-cell *matCellDef="let stat"> {{ stat.avgDelay | number:'1.0-2' }} </td>
+      </ng-container>
+
+      <!-- Pünktlich -->
+      <ng-container matColumnDef="onTimePercentage">
+        <th mat-header-cell *matHeaderCellDef> Pünktlich (%) </th>
+        <td mat-cell *matCellDef="let stat"> {{ stat.onTimePercentage | number:'1.0-2' }} % </td>
+      </ng-container>
+
+      <!-- Leicht verspätet -->
+      <ng-container matColumnDef="slightlyLatePercentage">
+        <th mat-header-cell *matHeaderCellDef> Leicht verspätet (%) </th>
+        <td mat-cell *matCellDef="let stat"> {{ stat.slightlyLatePercentage | number:'1.0-2' }} % </td>
+      </ng-container>
+
+      <!-- Verspätet -->
+      <ng-container matColumnDef="latePercentage">
+        <th mat-header-cell *matHeaderCellDef> Verspätet (%) </th>
+        <td mat-cell *matCellDef="let stat"> {{ stat.latePercentage | number:'1.0-2' }} % </td>
+      </ng-container>
+
+      <!-- Deutlich verspätet -->
+      <ng-container matColumnDef="severelyLatePercentage">
+        <th mat-header-cell *matHeaderCellDef> Deutlich verspätet (%) </th>
+        <td mat-cell *matCellDef="let stat"> {{ stat.severelyLatePercentage | number:'1.0-2' }} % </td>
+      </ng-container>
+
+      <!-- Header und Zeilen -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+  <div *ngIf="statistics.length > 0" class="charts">
+    <!-- Balkendiagramm -->
+    <div class="chart-container">
+      <p><strong>Durchschnittliche Verspätung aller Routen</strong></p>
+      <canvas baseChart
+              [data]="getBarChartData()"
+              [type]="'bar'"
+              [options]="barChartOptions">
+      </canvas>
+    </div>
+
+    <div *ngFor="let stat of statistics" class="chart-container">
+      <!-- Durchschnittliche Verspätung -->
+      <p>
+        <strong>Route {{ stat.routeID }}:</strong> Durchschnittliche Verspätung: {{ stat.avgDelay | number:'1.0-2' }} Sekunden
+      </p>
+
+      <!-- Tortendiagramm -->
+      <canvas
+        baseChart
+        [data]="getChartData(stat)"
+        [type]="'pie'"
+        [options]="chartOptions">
+      </canvas>
+    </div>
+  </div>
+
+
+  <!-- Fehlermeldung -->
+  <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+
+  <!-- Keine Ergebnisse -->
+  <p *ngIf="statistics.length === 0 && searchAttempted && !loading">
+    Keine Daten für den angegebenen Zeitraum gefunden.
+  </p>
+</div>

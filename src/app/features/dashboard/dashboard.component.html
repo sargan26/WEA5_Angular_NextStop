@@ -1,1 +1,81 @@
-<p>dashboard works!</p>
+<div class="container">
+  <h2>Anzeigetafel - Nächste Abfahrten</h2>
+
+  <!-- Suchformular -->
+  <form [formGroup]="dashboardForm" (ngSubmit)="onSearch()">
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Haltestellen-ID</mat-label>
+        <input matInput formControlName="stopId" placeholder="z. B. W-KJP"/>
+        <mat-error *ngIf="dashboardForm.get('stopId')?.invalid">
+          Haltestellen-ID ist erforderlich.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Datum</mat-label>
+        <input matInput type="date" formControlName="date"/>
+        <mat-error *ngIf="dashboardForm.get('date')?.invalid">
+          Datum ist erforderlich.
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Uhrzeit</mat-label>
+        <input matInput type="time" formControlName="time" />
+        <mat-error *ngIf="dashboardForm.get('time')?.invalid">
+          Uhrzeit ist erforderlich.
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Anzahl Verbindungen</mat-label>
+        <input matInput type="number" formControlName="limit" min="1" />
+        <mat-error *ngIf="dashboardForm.get('limit')?.invalid">
+          Anzahl der Verbindungen ist erforderlich.
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="dashboardForm.invalid">
+      Suchen
+    </button>
+  </form>
+
+  <!-- Ergebnis-Tabelle -->
+  <div *ngIf="nextDepartures.length > 0" class="results">
+    <table mat-table [dataSource]="nextDepartures" class="mat-elevation-z8">
+      <!-- Route ID -->
+      <ng-container matColumnDef="routeID">
+        <th mat-header-cell *matHeaderCellDef> Route </th>
+        <td mat-cell *matCellDef="let departure"> {{ departure.routeID }} </td>
+      </ng-container>
+
+      <!-- Abfahrtszeit -->
+      <ng-container matColumnDef="plannedDeparture">
+        <th mat-header-cell *matHeaderCellDef> Abfahrtszeit </th>
+        <td mat-cell *matCellDef="let departure">
+          {{ departure.plannedDeparture }}{{ departure.delayInMinutes > 0 ? ' (+' + departure.delayInMinutes + ' Min)' : '' }}
+        </td>
+      </ng-container>
+
+      <!-- Endstation -->
+      <ng-container matColumnDef="endStation">
+        <th mat-header-cell *matHeaderCellDef> Endstation </th>
+        <td mat-cell *matCellDef="let departure"> {{ departure.endStation }} </td>
+      </ng-container>
+
+      <!-- Header und Zeilen -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+  <!-- Keine Ergebnisse -->
+  <p *ngIf="nextDepartures.length === 0 && !loading && searchAttempted">Keine Abfahrten gefunden.</p>
+  <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+</div>

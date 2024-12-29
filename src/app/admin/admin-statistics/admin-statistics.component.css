@@ -1,0 +1,31 @@
+.container {
+  margin: 20px;
+}
+
+.mat-form-field {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.results {
+  margin-top: 20px;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+}
+
+.charts {
+  margin-top: 20px;
+}
+
+.chart-container {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+canvas {
+  max-width: 400px;
+  margin: 0 auto;
+}
