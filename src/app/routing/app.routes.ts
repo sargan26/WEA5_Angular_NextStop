@@ -13,7 +13,7 @@ import {AuthGuard} from './auth.guard';
 
 
 export const routes: Routes = [
-  // Allgemein
+  // General
   { path: ROUTES.TIMETABLE, component: TimetableComponent },
   { path: ROUTES.STOPS, component: StopsComponent },
   { path: ROUTES.DASHBOARD, component: DashboardComponent },

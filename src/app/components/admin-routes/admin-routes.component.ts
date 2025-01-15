@@ -123,8 +123,6 @@ sequenceNumberValidator(): ValidatorFn {
         this.loading = false;
         this.routeForm.markAsPristine();
         this.routeForm.markAsUntouched();
-        //this.routeForm.reset();
-        //this.routeStops.clear();
       },
       error: (error) => {
         if (error.status === 409) {

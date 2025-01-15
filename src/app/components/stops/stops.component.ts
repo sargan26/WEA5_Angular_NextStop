@@ -54,7 +54,7 @@ export class StopsComponent {
   set searchType(value: 'name' | 'location') {
     this._searchType = value;
     this.nameQuery = '';
-    this.stops = []; // Stops leeren, wenn der Suchtyp geändert wird
+    this.stops = [];
   }
 
   get latitudeError(): string | null {
@@ -86,10 +86,9 @@ export class StopsComponent {
   private searchSubject = new Subject<string>();
 
   constructor(private stopsService: StopsService) {
-    // Vorschlagssuche
     this.searchSubject.pipe(
-      debounceTime(300), // 300ms Verzögerung
-      distinctUntilChanged(), // Ignoriere gleiche Eingaben
+      debounceTime(300), // 300ms delay
+      distinctUntilChanged(), // ignore same inputs
       switchMap((query) =>
         query.trim()
           ? this.stopsService.searchByName(query).pipe(catchError(() => of([])))
@@ -102,7 +101,7 @@ export class StopsComponent {
 
   onNameInput(event: Event) {
     const input = event.target as HTMLInputElement;
-    this.searchSubject.next(input.value); // Vorschlagssuche triggern
+    this.searchSubject.next(input.value);
   }
 
   searchStops() {

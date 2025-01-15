@@ -58,8 +58,8 @@ export class AdminHolidaysComponent implements OnInit {
   successMessage: string | null = null;
   errorMessage: string | null = null;
   holidaySelectionError = false;
-  holidays: any[] = []; // Array für Feiertage
-  displayedColumns: string[] = ['date', 'description', 'isHoliday', 'isSchoolHoliday']; // Spalten für die Tabelle
+  holidays: any[] = [];
+  displayedColumns: string[] = ['date', 'description', 'isHoliday', 'isSchoolHoliday'];
   selectedHoliday: any = null;
 
   constructor(private holidaysService: AdminHolidaysService) {}
@@ -76,10 +76,10 @@ export class AdminHolidaysComponent implements OnInit {
   selectHoliday(holiday: any): void {
     this.selectedHoliday = holiday;
 
-    // Datum sicher in UTC umwandeln
-    const correctedDate = new Date(`${holiday.calendarDate}Z`); // 'Z' für UTC hinzufügen
+    // Convert date in UTC
+    const correctedDate = new Date(`${holiday.calendarDate}Z`); // Add 'Z' for UTC
 
-    // Fülle die Form mit den Werten des ausgewählten Eintrags
+    // Fill the form with values from selected entry
     this.holidayData.startDate = correctedDate.toISOString().split('T')[0];
     this.holidayData.endDate = correctedDate.toISOString().split('T')[0];
     this.holidayData.dateDescription = holiday.dateDescription;
@@ -103,7 +103,7 @@ export class AdminHolidaysComponent implements OnInit {
       Number(startDateParts[2]) // Day
     );
 
-    // Validierung
+    // Validation
     if (this.holidayData.startDate > this.holidayData.endDate) {
       this.errorMessage = 'Das Enddatum muss nach dem Startdatum liegen.';
       return;
@@ -119,7 +119,7 @@ export class AdminHolidaysComponent implements OnInit {
       return;
     }
 
-    // API-Aufruf
+    // API-Call
     this.holidaysService.createHoliday(this.holidayData).subscribe({
       next: (response) => {
         this.successMessage = "Feiertag erfolgreich erstellt."
@@ -201,7 +201,7 @@ export class AdminHolidaysComponent implements OnInit {
       Number(startDateParts[2]) // Day
     );
 
-    // Validierung
+    // Validation
     if (!this.holidayData.startDate || !this.holidayData.endDate) {
       this.errorMessage = 'Start- und Enddatum sind erforderlich, um einen Feiertag zu löschen.';
       return;
@@ -214,7 +214,7 @@ export class AdminHolidaysComponent implements OnInit {
 
     console.log('deleteHoliday()');
 
-    // API-Aufruf
+    // API-Call
     this.holidaysService.deleteHoliday(this.holidayData.startDate, this.holidayData.endDate).subscribe({
       next: (response) => {
         this.successMessage = "Feiertag gelöscht";

@@ -1,7 +1,7 @@
 <div class="container">
   <h2>Anzeigetafel - Nächste Abfahrten</h2>
 
-  <!-- Suchformular -->
+  <!-- Search form -->
   <form [formGroup]="dashboardForm" (ngSubmit)="onSearch()">
     <div>
       <mat-form-field appearance="fill">
@@ -46,7 +46,7 @@
     </button>
   </form>
 
-  <!-- Ergebnis-Tabelle -->
+  <!-- Result-table -->
   <div *ngIf="nextDepartures.length > 0" class="results">
     <table mat-table [dataSource]="nextDepartures" class="mat-elevation-z8">
       <!-- Route ID -->
@@ -55,7 +55,7 @@
         <td mat-cell *matCellDef="let departure"> {{ departure.routeID }} </td>
       </ng-container>
 
-      <!-- Abfahrtszeit -->
+      <!-- Departure time -->
       <ng-container matColumnDef="plannedDeparture">
         <th mat-header-cell *matHeaderCellDef> Abfahrtszeit </th>
         <td mat-cell *matCellDef="let departure">
@@ -63,19 +63,19 @@
         </td>
       </ng-container>
 
-      <!-- Endstation -->
+      <!-- End station -->
       <ng-container matColumnDef="endStation">
         <th mat-header-cell *matHeaderCellDef> Endstation </th>
         <td mat-cell *matCellDef="let departure"> {{ departure.endStation }} </td>
       </ng-container>
 
-      <!-- Header und Zeilen -->
+      <!-- Header and columns -->
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
   </div>
 
-  <!-- Keine Ergebnisse -->
+  <!-- No results -->
   <p *ngIf="nextDepartures.length === 0 && !loading && searchAttempted">Keine Abfahrten gefunden.</p>
   <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
 </div>

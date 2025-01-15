@@ -1,6 +1,6 @@
 <div class="container">
   <form #holidayForm="ngForm">
-    <!-- Startdatum -->
+    <!-- Start date -->
     <mat-form-field class="field" appearance="fill">
       <mat-label>Startdatum</mat-label>
       <input
@@ -16,7 +16,7 @@
       </mat-error>
     </mat-form-field>
 
-    <!-- Enddatum -->
+    <!-- End date -->
     <mat-form-field class="field" appearance="fill">
       <mat-label>Enddatum</mat-label>
       <input
@@ -35,7 +35,7 @@
       </mat-error>
     </mat-form-field>
 
-    <!-- Beschreibung -->
+    <!-- Description -->
     <mat-form-field class="field" appearance="fill">
       <mat-label>Beschreibung</mat-label>
       <input
@@ -48,7 +48,7 @@
       />
     </mat-form-field>
 
-    <!-- Feiertag Auswahl -->
+    <!-- Holiday selection -->
     <div class="radio-group">
       <mat-radio-group
         [(ngModel)]="holidayData.isHoliday"
@@ -87,16 +87,16 @@
     </div>
 
 
-    <!-- Erfolg- und Fehlermeldungen -->
+    <!-- Sucess- and Errormessages -->
     <p *ngIf="successMessage" class="success">{{ successMessage }}</p>
     <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
   </form>
 
-  <!-- Feiertage-Tabelle -->
+  <!-- Holiday-Table -->
   <div>
     <h3>Liste aller Feiertage</h3>
     <table mat-table [dataSource]="holidays" class="mat-elevation-z8" matSort>
-      <!-- Tabelle Kopf -->
+      <!-- Table header -->
       <ng-container matColumnDef="dateDescription">
         <th mat-header-cell *matHeaderCellDef> Beschreibung </th>
         <td

@@ -45,13 +45,13 @@
         <td mat-cell *matCellDef="let result"> {{ result.routeId }} </td>
       </ng-container>
 
-      <!-- Start-Haltestelle Column -->
+      <!-- Start-Stop Column -->
       <ng-container matColumnDef="startStop">
         <th mat-header-cell *matHeaderCellDef> Abfahrtszeit Start-Haltestelle </th>
         <td mat-cell *matCellDef="let result"> {{ result.startTimeStop }} </td>
       </ng-container>
 
-      <!-- End-Haltestelle Column -->
+      <!-- End-Stop Column -->
       <ng-container matColumnDef="endStop">
         <th mat-header-cell *matHeaderCellDef> Ankunftszeit End-Haltestelle </th>
         <td mat-cell *matCellDef="let result"> {{ result.endTimeStop }} </td>

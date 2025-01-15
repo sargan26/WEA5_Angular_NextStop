@@ -29,7 +29,7 @@
       <input matInput type="date" formControlName="validUntil" />
     </mat-form-field>
 
-    <!-- Fehlermeldung -->
+    <!-- Error Message -->
     <p *ngIf="routeForm.hasError('invalidDateRange')" class="error">
       Das Startdatum muss vor dem Enddatum liegen.
     </p>
@@ -98,7 +98,7 @@
       Route erstellen
     </button>
 
-    <!-- Erfolg- und Fehlermeldungen -->
+    <!-- Sucess- and Errormessages -->
     <p *ngIf="successMessage" class="success">{{ successMessage }}</p>
     <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
   </form>

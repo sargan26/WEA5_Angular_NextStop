@@ -10,7 +10,7 @@
   margin-bottom: 10px;
 }
 .search-form button {
-  margin-bottom: 20px; /* Abstand zum nächsten Element */
+  margin-bottom: 20px;
 }
 .invalid-input .mat-form-field-wrapper {
   border: 1px solid red;

@@ -41,7 +41,7 @@ export class AppComponent {
   constructor(private router: Router, private authService: AuthenticationService) {
     this.authService.configure();
 
-    // Überwache die Route und aktualisiere den Titel
+    // Monitor route and update title
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe(() => {
@@ -66,7 +66,7 @@ export class AppComponent {
     return this.authService.getRole();
   }
 
-  // Methode zur Aktualisierung des Titels basierend auf der Route
+  // Update title based on route
   updatePageTitle() {
     const route = this.router.url;
 

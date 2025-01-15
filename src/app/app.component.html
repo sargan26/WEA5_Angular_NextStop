@@ -2,14 +2,14 @@
   <!-- Sidebar -->
   <mat-sidenav #sidenav mode="side" opened>
     <mat-nav-list>
-      <!-- Allgemein -->
+      <!-- General -->
       <div mat-subheader class="section-header">Allgemein</div>
       <a mat-list-item [routerLink]="'/' + ROUTES.TIMETABLE">Fahrplanabfrage</a>
       <a mat-list-item [routerLink]="'/' + ROUTES.STOPS">Haltestellen</a>
       <a mat-list-item [routerLink]="'/' + ROUTES.DASHBOARD">Anzeigetafel</a>
       <a mat-list-item [routerLink]="'/' + ROUTES.STATISTICS">Statistiken</a>
 
-      <!-- Admin (nur sichtbar für Admins) -->
+      <!-- Admin (only visible for Admins) -->
       <ng-container *ngIf="isLoggedIn() && (getRole() === 'ROLE_ADMIN' || getRole() === 'ROLE_COMPANY')">
         <div mat-subheader class="section-header">Admin</div>
         <a mat-list-item [routerLink]="'/' + ROUTES.ADMIN.STOPS">Haltestellen</a>
@@ -17,7 +17,7 @@
         <a mat-list-item [routerLink]="'/' + ROUTES.ADMIN.HOLIDAYS">Feiertage</a>
       </ng-container>
 
-      <!-- Benutzer -->
+      <!-- Current user -->
       <div mat-subheader class="section-header">Benutzer</div>
       <mat-list-item *ngIf="isLoggedIn()" class="user-info">
         Angemeldet als:
@@ -36,7 +36,7 @@
   </mat-sidenav>
 
 
-  <!-- Hauptinhalt -->
+  <!-- Main content -->
   <mat-sidenav-content>
     <mat-toolbar color="primary">
       <button mat-icon-button (click)="toggleSidenav(sidenav)">
