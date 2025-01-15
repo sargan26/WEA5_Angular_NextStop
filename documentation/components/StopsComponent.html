@@ -1,0 +1,1358 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>next-stop documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">next-stop documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  StopsComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/stops/stops.component.ts</code>
+</p>
+
+
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>mitterlehner-stops</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>MatFormFieldModule</code>
+                            <code>MatInputModule</code>
+                            <code>MatRadioModule</code>
+                            <code>MatButtonModule</code>
+                            <code>FormsModule</code>
+                            <code>NgIf</code>
+                            <code>MatTable</code>
+                            <code>MatColumnDef</code>
+                            <code>MatHeaderCell</code>
+                            <code>MatCell</code>
+                            <code>MatCellDef</code>
+                            <code>MatHeaderCellDef</code>
+                            <code>MatHeaderRow</code>
+                            <code>MatRow</code>
+                            <code>MatRowDef</code>
+                            <code>MatHeaderRowDef</code>
+                            <code>NgClass</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./stops.component.css</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./stops.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#_searchType" >_searchType</a>
+                            </li>
+                            <li>
+                                <a href="#displayedColumns" >displayedColumns</a>
+                            </li>
+                            <li>
+                                <a href="#errorMessage" >errorMessage</a>
+                            </li>
+                            <li>
+                                <a href="#latitude" >latitude</a>
+                            </li>
+                            <li>
+                                <a href="#longitude" >longitude</a>
+                            </li>
+                            <li>
+                                <a href="#nameQuery" >nameQuery</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#searchSubject" >searchSubject</a>
+                            </li>
+                            <li>
+                                <a href="#stops" >stops</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#isLatitudeValid" >isLatitudeValid</a>
+                            </li>
+                            <li>
+                                <a href="#isLocationValid" >isLocationValid</a>
+                            </li>
+                            <li>
+                                <a href="#isLongitudeValid" >isLongitudeValid</a>
+                            </li>
+                            <li>
+                                <a href="#onNameInput" >onNameInput</a>
+                            </li>
+                            <li>
+                                <a href="#searchStops" >searchStops</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#searchType" >searchType</a>
+                                </li>
+                                <li>
+                                    <a href="#latitudeError" >latitudeError</a>
+                                </li>
+                                <li>
+                                    <a href="#longitudeError" >longitudeError</a>
+                                </li>
+                                <li>
+                                    <a href="#isFormInvalid" >isFormInvalid</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(stopsService: <a href="../injectables/StopsService.html" target="_self">StopsService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="86" class="link-to-prism">src/app/components/stops/stops.component.ts:86</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>stopsService</td>
+
+                                                        <td>
+                                                                        <code><a href="../injectables/StopsService.html" target="_self" >StopsService</a></code>
+                                                        </td>
+
+                                                    <td>
+                                                            No
+                                                    </td>
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isLatitudeValid"></a>
+                    <span class="name">
+                        <span ><b>isLatitudeValid</b></span>
+                        <a href="#isLatitudeValid"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>isLatitudeValid()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="123"
+                                    class="link-to-prism">src/app/components/stops/stops.component.ts:123</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isLocationValid"></a>
+                    <span class="name">
+                        <span ><b>isLocationValid</b></span>
+                        <a href="#isLocationValid"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>isLocationValid()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="131"
+                                    class="link-to-prism">src/app/components/stops/stops.component.ts:131</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isLongitudeValid"></a>
+                    <span class="name">
+                        <span ><b>isLongitudeValid</b></span>
+                        <a href="#isLongitudeValid"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>isLongitudeValid()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="127"
+                                    class="link-to-prism">src/app/components/stops/stops.component.ts:127</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onNameInput"></a>
+                    <span class="name">
+                        <span ><b>onNameInput</b></span>
+                        <a href="#onNameInput"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onNameInput(event: Event)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="103"
+                                    class="link-to-prism">src/app/components/stops/stops.component.ts:103</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>Event</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="searchStops"></a>
+                    <span class="name">
+                        <span ><b>searchStops</b></span>
+                        <a href="#searchStops"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>searchStops()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="108"
+                                    class="link-to-prism">src/app/components/stops/stops.component.ts:108</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="_searchType"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>_searchType</b></span>
+                        <a href="#_searchType"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>&quot;name&quot; | &quot;location&quot;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;name&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/components/stops/stops.component.ts:48</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="displayedColumns"></a>
+                    <span class="name">
+                        <span ><b>displayedColumns</b></span>
+                        <a href="#displayedColumns"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[&#x27;stopName&#x27;, &#x27;latitude&#x27;, &#x27;longitude&#x27;]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="83" class="link-to-prism">src/app/components/stops/stops.component.ts:83</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="errorMessage"></a>
+                    <span class="name">
+                        <span ><b>errorMessage</b></span>
+                        <a href="#errorMessage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="79" class="link-to-prism">src/app/components/stops/stops.component.ts:79</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="latitude"></a>
+                    <span class="name">
+                        <span ><b>latitude</b></span>
+                        <a href="#latitude"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>number | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">src/app/components/stops/stops.component.ts:80</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="longitude"></a>
+                    <span class="name">
+                        <span ><b>longitude</b></span>
+                        <a href="#longitude"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>number | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="81" class="link-to-prism">src/app/components/stops/stops.component.ts:81</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="nameQuery"></a>
+                    <span class="name">
+                        <span ><b>nameQuery</b></span>
+                        <a href="#nameQuery"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="78" class="link-to-prism">src/app/components/stops/stops.component.ts:78</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="searchSubject"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>searchSubject</b></span>
+                        <a href="#searchSubject"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Subject&lt;string&gt;()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="86" class="link-to-prism">src/app/components/stops/stops.component.ts:86</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="stops"></a>
+                    <span class="name">
+                        <span ><b>stops</b></span>
+                        <a href="#stops"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Stop.html" target="_self" >Stop[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="82" class="link-to-prism">src/app/components/stops/stops.component.ts:82</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="searchType"></a>
+                        <span class="name"><b>searchType</b><a href="#searchType"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>searchType()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/components/stops/stops.component.ts:50</a></div>
+                                </td>
+                            </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>searchType(value: "name" | "location")</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/components/stops/stops.component.ts:54</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                        <td>Type</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>value</td>
+
+                                                            <td>
+                                                                        <code>&quot;name&quot; | &quot;location&quot;</code>
+                                                            </td>
+
+                                                        <td>
+                                                                No
+                                                        </td>
+
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="latitudeError"></a>
+                        <span class="name"><b>latitudeError</b><a href="#latitudeError"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>latitudeError()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/components/stops/stops.component.ts:60</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="longitudeError"></a>
+                        <span class="name"><b>longitudeError</b><a href="#longitudeError"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>longitudeError()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/components/stops/stops.component.ts:67</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isFormInvalid"></a>
+                        <span class="name"><b>isFormInvalid</b><a href="#isFormInvalid"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>isFormInvalid()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">src/app/components/stops/stops.component.ts:74</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
+import { MatFormFieldModule } from &#x27;@angular/material/form-field&#x27;;
+import { MatInputModule } from &#x27;@angular/material/input&#x27;;
+import { MatRadioModule } from &#x27;@angular/material/radio&#x27;;
+import { MatButtonModule } from &#x27;@angular/material/button&#x27;;
+import { FormsModule } from &#x27;@angular/forms&#x27;;
+import { NgClass, NgIf} from &#x27;@angular/common&#x27;;
+import { StopsService, Stop } from &#x27;../../services/stops/stops.service&#x27;;
+import {
+  MatCell,
+  MatCellDef,
+  MatColumnDef,
+  MatHeaderCell,
+  MatHeaderCellDef,
+  MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef,
+  MatTable
+} from &#x27;@angular/material/table&#x27;;
+import { Subject } from &#x27;rxjs&#x27;;
+import { debounceTime, distinctUntilChanged, switchMap, catchError } from &#x27;rxjs/operators&#x27;;
+import { of } from &#x27;rxjs&#x27;;
+
+@Component({
+  selector: &#x27;mitterlehner-stops&#x27;,
+  standalone: true,
+  imports: [
+    MatFormFieldModule,
+    MatInputModule,
+    MatRadioModule,
+    MatButtonModule,
+    FormsModule,
+    NgIf,
+    MatTable,
+    MatColumnDef,
+    MatHeaderCell,
+    MatCell,
+    MatCellDef,
+    MatHeaderCellDef,
+    MatHeaderRow,
+    MatRow,
+    MatRowDef,
+    MatHeaderRowDef,
+    NgClass
+  ],
+  templateUrl: &#x27;./stops.component.html&#x27;,
+  styleUrls: [&#x27;./stops.component.css&#x27;]
+})
+export class StopsComponent {
+  private _searchType: &#x27;name&#x27; | &#x27;location&#x27; &#x3D; &#x27;name&#x27;;
+
+  get searchType(): &#x27;name&#x27; | &#x27;location&#x27; {
+    return this._searchType;
+  }
+
+  set searchType(value: &#x27;name&#x27; | &#x27;location&#x27;) {
+    this._searchType &#x3D; value;
+    this.nameQuery &#x3D; &#x27;&#x27;;
+    this.stops &#x3D; []; // Stops leeren, wenn der Suchtyp geändert wird
+  }
+
+  get latitudeError(): string | null {
+    if (this.latitude !&#x3D;&#x3D; null &amp;&amp; (this.latitude &lt; -90 || this.latitude &gt; 90)) {
+      return &#x27;Breitengrad muss zwischen -90 und 90 liegen.&#x27;;
+    }
+    return null;
+  }
+
+  get longitudeError(): string | null {
+    if (this.longitude !&#x3D;&#x3D; null &amp;&amp; (this.longitude &lt; -180 || this.longitude &gt; 180)) {
+      return &#x27;Längengrad muss zwischen -180 und 180 liegen.&#x27;;
+    }
+    return null;
+  }
+
+  get isFormInvalid(): boolean {
+    return !!this.latitudeError || !!this.longitudeError;
+  }
+
+  nameQuery: string &#x3D; &#x27;&#x27;;
+  errorMessage: string | null &#x3D; null;
+  latitude: number | null &#x3D; null;
+  longitude: number | null &#x3D; null;
+  stops: Stop[] &#x3D; [];
+  displayedColumns: string[] &#x3D; [&#x27;stopName&#x27;, &#x27;latitude&#x27;, &#x27;longitude&#x27;]
+
+
+  private searchSubject &#x3D; new Subject&lt;string&gt;();
+
+  constructor(private stopsService: StopsService) {
+    // Vorschlagssuche
+    this.searchSubject.pipe(
+      debounceTime(300), // 300ms Verzögerung
+      distinctUntilChanged(), // Ignoriere gleiche Eingaben
+      switchMap((query) &#x3D;&gt;
+        query.trim()
+          ? this.stopsService.searchByName(query).pipe(catchError(() &#x3D;&gt; of([])))
+          : of([])
+      )
+    ).subscribe((results) &#x3D;&gt; {
+      this.stops &#x3D; results;
+    });
+  }
+
+  onNameInput(event: Event) {
+    const input &#x3D; event.target as HTMLInputElement;
+    this.searchSubject.next(input.value); // Vorschlagssuche triggern
+  }
+
+  searchStops() {
+    if (this.searchType &#x3D;&#x3D;&#x3D; &#x27;location&#x27; &amp;&amp; this.latitude !&#x3D;&#x3D; null &amp;&amp; this.longitude !&#x3D;&#x3D; null) {
+      this.stopsService.searchByLocation(this.latitude, this.longitude).subscribe({
+        next: (results) &#x3D;&gt; {
+          this.stops &#x3D; results;
+        },
+        error: (err) &#x3D;&gt; {
+          console.error(&#x27;Fehler bei der Suche:&#x27;, err);
+        },
+      });
+    } else {
+      console.error(&#x27;Ungültige Eingaben.&#x27;);
+    }
+  }
+
+  isLatitudeValid(): boolean {
+    return this.latitude !&#x3D;&#x3D; null &amp;&amp; this.latitude &gt;&#x3D; -90 &amp;&amp; this.latitude &lt;&#x3D; 90;
+  }
+
+  isLongitudeValid(): boolean {
+    return this.longitude !&#x3D;&#x3D; null &amp;&amp; this.longitude &gt;&#x3D; -180 &amp;&amp; this.longitude &lt;&#x3D; 180;
+  }
+
+  isLocationValid(): boolean {
+    return this.isLatitudeValid() &amp;&amp; this.isLongitudeValid();
+  }
+
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;container&quot;&gt;
+  &lt;h2&gt;Haltestellenabfrage&lt;/h2&gt;
+  &lt;form class&#x3D;&quot;search-form&quot;&gt;
+    &lt;mat-radio-group [(ngModel)]&#x3D;&quot;searchType&quot; name&#x3D;&quot;searchType&quot; class&#x3D;&quot;radio-group&quot;&gt;
+      &lt;mat-radio-button value&#x3D;&quot;name&quot;&gt;Nach Name suchen&lt;/mat-radio-button&gt;
+      &lt;mat-radio-button value&#x3D;&quot;location&quot;&gt;Nach Standort suchen&lt;/mat-radio-button&gt;
+    &lt;/mat-radio-group&gt;
+
+    &lt;!-- Suche nach Name --&gt;
+    &lt;div *ngIf&#x3D;&quot;searchType &#x3D;&#x3D;&#x3D; &#x27;name&#x27;&quot; class&#x3D;&quot;field&quot;&gt;
+      &lt;mat-form-field appearance&#x3D;&quot;fill&quot;&gt;
+        &lt;mat-label&gt;Haltestellenname&lt;/mat-label&gt;
+        &lt;input
+          matInput
+          type&#x3D;&quot;text&quot;
+          [(ngModel)]&#x3D;&quot;nameQuery&quot;
+          name&#x3D;&quot;nameQuery&quot;
+          placeholder&#x3D;&quot;z. B. Hauptbahnhof&quot;
+          (input)&#x3D;&quot;onNameInput($event)&quot;
+        /&gt;
+      &lt;/mat-form-field&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Suche nach Standort --&gt;
+    &lt;div *ngIf&#x3D;&quot;searchType &#x3D;&#x3D;&#x3D; &#x27;location&#x27;&quot; class&#x3D;&quot;field&quot; [ngClass]&#x3D;&quot;{ &#x27;invalid-input&#x27;: isLatitudeValid() }&quot;&gt;
+      &lt;!-- Latitude --&gt;
+      &lt;mat-form-field appearance&#x3D;&quot;fill&quot;&gt;
+        &lt;mat-label&gt;Breitengrad (Latitude)&lt;/mat-label&gt;
+        &lt;input
+          matInput
+          type&#x3D;&quot;number&quot;
+          [(ngModel)]&#x3D;&quot;latitude&quot;
+          name&#x3D;&quot;latitude&quot;
+          placeholder&#x3D;&quot;z. B. 48.368&quot;
+        /&gt;
+        &lt;div *ngIf&#x3D;&quot;latitudeError&quot; class&#x3D;&quot;error-message&quot;&gt;{{ latitudeError }}&lt;/div&gt;
+      &lt;/mat-form-field&gt;
+
+      &lt;!-- Longitude --&gt;
+      &lt;mat-form-field appearance&#x3D;&quot;fill&quot; [ngClass]&#x3D;&quot;{ &#x27;invalid-input&#x27;: isLongitudeValid() }&quot;&gt;
+        &lt;mat-label&gt;Längengrad (Longitude)&lt;/mat-label&gt;
+        &lt;input
+          matInput
+          type&#x3D;&quot;number&quot;
+          [(ngModel)]&#x3D;&quot;longitude&quot;
+          name&#x3D;&quot;longitude&quot;
+          placeholder&#x3D;&quot;z. B. 14.512&quot;
+        /&gt;
+        &lt;div *ngIf&#x3D;&quot;longitudeError&quot; class&#x3D;&quot;error-message&quot;&gt;{{ longitudeError }}&lt;/div&gt;
+      &lt;/mat-form-field&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Suchen-Button --&gt;
+    &lt;button
+      *ngIf&#x3D;&quot;searchType &#x3D;&#x3D;&#x3D; &#x27;location&#x27;&quot;
+      mat-raised-button
+      color&#x3D;&quot;primary&quot;
+      type&#x3D;&quot;button&quot;
+      (click)&#x3D;&quot;searchStops()&quot;
+      [disabled]&#x3D;&quot;!isLocationValid()&quot;
+    &gt;
+      Suchen
+    &lt;/button&gt;
+
+  &lt;/form&gt;
+
+  &lt;!-- Ergebnisse --&gt;
+  &lt;div *ngIf&#x3D;&quot;stops.length &gt; 0&quot; class&#x3D;&quot;results&quot;&gt;
+    &lt;table mat-table [dataSource]&#x3D;&quot;stops&quot; class&#x3D;&quot;mat-elevation-z8&quot;&gt;
+      &lt;!-- Spalten --&gt;
+      &lt;ng-container matColumnDef&#x3D;&quot;stopName&quot;&gt;
+        &lt;th mat-header-cell *matHeaderCellDef&gt; Haltestellenname &lt;/th&gt;
+        &lt;td mat-cell *matCellDef&#x3D;&quot;let stop&quot;&gt; {{ stop.stopName }} &lt;/td&gt;
+      &lt;/ng-container&gt;
+
+      &lt;ng-container matColumnDef&#x3D;&quot;latitude&quot;&gt;
+        &lt;th mat-header-cell *matHeaderCellDef&gt; Breitengrad &lt;/th&gt;
+        &lt;td mat-cell *matCellDef&#x3D;&quot;let stop&quot;&gt; {{ stop.latitude }} &lt;/td&gt;
+      &lt;/ng-container&gt;
+
+      &lt;ng-container matColumnDef&#x3D;&quot;longitude&quot;&gt;
+        &lt;th mat-header-cell *matHeaderCellDef&gt; Längengrad &lt;/th&gt;
+        &lt;td mat-cell *matCellDef&#x3D;&quot;let stop&quot;&gt; {{ stop.longitude }} &lt;/td&gt;
+      &lt;/ng-container&gt;
+
+      &lt;!-- Header- und Zeilen-Deklaration --&gt;
+      &lt;tr mat-header-row *matHeaderRowDef&#x3D;&quot;displayedColumns&quot;&gt;&lt;/tr&gt;
+      &lt;tr mat-row *matRowDef&#x3D;&quot;let row; columns: displayedColumns;&quot;&gt;&lt;/tr&gt;
+    &lt;/table&gt;
+  &lt;/div&gt;
+
+  &lt;div *ngIf&#x3D;&quot;stops.length &#x3D;&#x3D;&#x3D; 0 &amp;&amp;
+  (searchType &#x3D;&#x3D;&#x3D; &#x27;name&#x27; &amp;&amp; nameQuery.trim())
+  || (searchType &#x3D;&#x3D;&#x3D; &#x27;location&#x27; &amp;&amp; latitude &amp;&amp; longitude)&quot;&gt;
+    &lt;p&gt;Keine Haltestellen gefunden.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./stops.component.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.container {
+  margin: 10px;
+}
+.radio-group {
+  margin-bottom: 10px;
+  display: flex;
+  gap: 10px;
+}
+.field {
+  margin-bottom: 10px;
+}
+.search-form button {
+  margin-bottom: 20px; /* Abstand zum nächsten Element */
+}
+.invalid-input .mat-form-field-wrapper {
+  border: 1px solid red;
+}
+.error-message {
+  color: red;
+  font-size: 0.9em;
+  margin-top: 5px;
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="container">  <h2>Haltestellenabfrage</h2>  <form class="search-form">    <mat-radio-group [(ngModel)]="searchType" name="searchType" class="radio-group">      <mat-radio-button value="name">Nach Name suchen</mat-radio-button>      <mat-radio-button value="location">Nach Standort suchen</mat-radio-button>    </mat-radio-group>    <!-- Suche nach Name -->    <div *ngIf="searchType === \'name\'" class="field">      <mat-form-field appearance="fill">        <mat-label>Haltestellenname</mat-label>        <input          matInput          type="text"          [(ngModel)]="nameQuery"          name="nameQuery"          placeholder="z. B. Hauptbahnhof"          (input)="onNameInput($event)"        />      </mat-form-field>    </div>    <!-- Suche nach Standort -->    <div *ngIf="searchType === \'location\'" class="field" [ngClass]="{ \'invalid-input\': isLatitudeValid() }">      <!-- Latitude -->      <mat-form-field appearance="fill">        <mat-label>Breitengrad (Latitude)</mat-label>        <input          matInput          type="number"          [(ngModel)]="latitude"          name="latitude"          placeholder="z. B. 48.368"        />        <div *ngIf="latitudeError" class="error-message">{{ latitudeError }}</div>      </mat-form-field>      <!-- Longitude -->      <mat-form-field appearance="fill" [ngClass]="{ \'invalid-input\': isLongitudeValid() }">        <mat-label>Längengrad (Longitude)</mat-label>        <input          matInput          type="number"          [(ngModel)]="longitude"          name="longitude"          placeholder="z. B. 14.512"        />        <div *ngIf="longitudeError" class="error-message">{{ longitudeError }}</div>      </mat-form-field>    </div>    <!-- Suchen-Button -->    <button      *ngIf="searchType === \'location\'"      mat-raised-button      color="primary"      type="button"      (click)="searchStops()"      [disabled]="!isLocationValid()"    >      Suchen    </button>  </form>  <!-- Ergebnisse -->  <div *ngIf="stops.length > 0" class="results">    <table mat-table [dataSource]="stops" class="mat-elevation-z8">      <!-- Spalten -->      <ng-container matColumnDef="stopName">        <th mat-header-cell *matHeaderCellDef> Haltestellenname </th>        <td mat-cell *matCellDef="let stop"> {{ stop.stopName }} </td>      </ng-container>      <ng-container matColumnDef="latitude">        <th mat-header-cell *matHeaderCellDef> Breitengrad </th>        <td mat-cell *matCellDef="let stop"> {{ stop.latitude }} </td>      </ng-container>      <ng-container matColumnDef="longitude">        <th mat-header-cell *matHeaderCellDef> Längengrad </th>        <td mat-cell *matCellDef="let stop"> {{ stop.longitude }} </td>      </ng-container>      <!-- Header- und Zeilen-Deklaration -->      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>    </table>  </div>  <div *ngIf="stops.length === 0 &&  (searchType === \'name\' && nameQuery.trim())  || (searchType === \'location\' && latitude && longitude)">    <p>Keine Haltestellen gefunden.</p>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AdminHolidaysComponent', 'selector': 'app-admin-holidays'},{'name': 'AdminRoutesComponent', 'selector': 'mitterlehner-admin-routes'},{'name': 'AdminStatisticsComponent', 'selector': 'app-statistics'},{'name': 'AdminStopsComponent', 'selector': 'app-admin-stops'},{'name': 'AppComponent', 'selector': 'mitterlehner-root'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'StopsComponent', 'selector': 'mitterlehner-stops'},{'name': 'TimetableComponent', 'selector': 'app-timetable'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'StopsComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'StopsComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

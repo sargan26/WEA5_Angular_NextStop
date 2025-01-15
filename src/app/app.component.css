@@ -1,0 +1,36 @@
+/*.user-section {*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  gap: 10px;*/
+/*  margin-top: 20px;*/
+/*}*/
+
+/*.user-info {*/
+/*  font-size: 14px;*/
+/*  color: #666;*/
+/*  margin-bottom: 10px;*/
+/*}*/
+
+/*button[mat-button] {*/
+/*  width: 100%;*/
+/*  text-align: left;*/
+/*}*/
+
+.section-header {
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-top: 10px;
+}
+
+.user-info {
+  font-size: 14px;
+  color: #666;
+}
+
+.user-action .action-button {
+  width: 100%;
+  justify-content: flex-start;
+  text-align: left;
+}
+
+

@@ -4,20 +4,37 @@
     <mat-nav-list>
       <!-- Allgemein -->
       <div mat-subheader class="section-header">Allgemein</div>
-      <a mat-list-item routerLink="/timetable">Fahrplanabfrage</a>
-      <a mat-list-item routerLink="/stops">Haltestellen</a>
-      <a mat-list-item routerLink="/dashboard">Anzeigetafel</a>
+      <a mat-list-item [routerLink]="'/' + ROUTES.TIMETABLE">Fahrplanabfrage</a>
+      <a mat-list-item [routerLink]="'/' + ROUTES.STOPS">Haltestellen</a>
+      <a mat-list-item [routerLink]="'/' + ROUTES.DASHBOARD">Anzeigetafel</a>
+      <a mat-list-item [routerLink]="'/' + ROUTES.STATISTICS">Statistiken</a>
 
       <!-- Admin (nur sichtbar für Admins) -->
-      <ng-container *ngIf="isAdmin">
+      <ng-container *ngIf="isLoggedIn() && (getRole() === 'ROLE_ADMIN' || getRole() === 'ROLE_COMPANY')">
         <div mat-subheader class="section-header">Admin</div>
-        <a mat-list-item routerLink="/admin/stops">Haltestellen</a>
-        <a mat-list-item routerLink="/admin/routes">Routen</a>
-        <a mat-list-item routerLink="/admin/holidays">Feiertage</a>
-        <a mat-list-item routerLink="/admin/statistics">Statistiken</a>
+        <a mat-list-item [routerLink]="'/' + ROUTES.ADMIN.STOPS">Haltestellen</a>
+        <a mat-list-item [routerLink]="'/' + ROUTES.ADMIN.ROUTES">Routen</a>
+        <a mat-list-item [routerLink]="'/' + ROUTES.ADMIN.HOLIDAYS">Feiertage</a>
       </ng-container>
+
+      <!-- Benutzer -->
+      <div mat-subheader class="section-header">Benutzer</div>
+      <mat-list-item *ngIf="isLoggedIn()" class="user-info">
+        Angemeldet als:
+      </mat-list-item>
+      <mat-list-item *ngIf="isLoggedIn()" class="user-info">
+        {{ getRole() }}
+      </mat-list-item>
+
+      <mat-list-item *ngIf="!isLoggedIn()" (click)="login()" class="user-action">
+        <button mat-button color="primary" class="action-button">Login</button>
+      </mat-list-item>
+      <mat-list-item *ngIf="isLoggedIn()" (click)="logout()" class="user-action">
+        <button mat-button color="warn" class="action-button">Logout</button>
+      </mat-list-item>
     </mat-nav-list>
   </mat-sidenav>
+
 
   <!-- Hauptinhalt -->
   <mat-sidenav-content>

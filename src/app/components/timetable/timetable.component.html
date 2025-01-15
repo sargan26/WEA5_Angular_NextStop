@@ -1,0 +1,67 @@
+<div class="container">
+  <h2>Fahrplanabfrage</h2>
+
+  <!-- Form for timetable search -->
+  <form [formGroup]="timetableForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Start-Haltestelle</mat-label>
+      <input matInput formControlName="startStopId" placeholder="Start ID" />
+      <mat-error *ngIf="timetableForm.get('startStopId')?.invalid">Start-Haltestelle ist erforderlich.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Ziel-Haltestelle</mat-label>
+      <input matInput formControlName="endStopId" placeholder="Ziel ID" />
+      <mat-error *ngIf="timetableForm.get('endStopId')?.invalid">Ziel-Haltestelle ist erforderlich.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Datum</mat-label>
+      <input matInput type="date" formControlName="date" />
+      <mat-error *ngIf="timetableForm.get('date')?.invalid">Datum ist erforderlich.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Uhrzeit</mat-label>
+      <input matInput type="time" formControlName="time" />
+      <mat-error *ngIf="timetableForm.get('time')?.invalid">Uhrzeit ist erforderlich.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Anzahl Verbindungen</mat-label>
+      <input matInput type="number" formControlName="limit" min="1" />
+      <mat-error *ngIf="timetableForm.get('limit')?.invalid">Anzahl ist erforderlich.</mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="timetableForm.invalid">Suchen</button>
+  </form>
+
+  <!-- Result table -->
+  <div *ngIf="results.length > 0" class="results">
+    <table mat-table [dataSource]="results" class="mat-elevation-z8">
+      <!-- Route Column -->
+      <ng-container matColumnDef="route">
+        <th mat-header-cell *matHeaderCellDef> Route </th>
+        <td mat-cell *matCellDef="let result"> {{ result.routeId }} </td>
+      </ng-container>
+
+      <!-- Start-Haltestelle Column -->
+      <ng-container matColumnDef="startStop">
+        <th mat-header-cell *matHeaderCellDef> Abfahrtszeit Start-Haltestelle </th>
+        <td mat-cell *matCellDef="let result"> {{ result.startTimeStop }} </td>
+      </ng-container>
+
+      <!-- End-Haltestelle Column -->
+      <ng-container matColumnDef="endStop">
+        <th mat-header-cell *matHeaderCellDef> Ankunftszeit End-Haltestelle </th>
+        <td mat-cell *matCellDef="let result"> {{ result.endTimeStop }} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+  <!-- Error message -->
+  <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+</div>

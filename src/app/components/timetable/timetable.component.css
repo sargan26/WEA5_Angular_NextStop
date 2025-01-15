@@ -1,0 +1,15 @@
+.container {
+  margin: 20px;
+}
+
+.mat-elevation-z8 {
+  margin-top: 20px;
+}
+
+.error {
+  color: red;
+}
+
+.success {
+  color: green;
+}

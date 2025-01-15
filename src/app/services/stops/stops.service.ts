@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {environment} from '../../../environment';
 
 export interface Stop {
   stopID: string;
@@ -13,7 +14,7 @@ export interface Stop {
   providedIn: 'root',
 })
 export class StopsService {
-  private readonly apiUrl = 'http://localhost:5051/api/stops';
+  private readonly apiUrl = `${environment.apiBaseUrl}/stops`;
 
   constructor(private http: HttpClient) {}
 

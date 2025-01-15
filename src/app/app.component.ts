@@ -1,4 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
+import { ROUTES } from './routing/app.routes.constants';
 import {NavigationEnd, Router, RouterLink, RouterOutlet} from '@angular/router';
 import {MatSidenav, MatSidenavContainer, MatSidenavContent} from '@angular/material/sidenav';
 import {MatListItem, MatListSubheaderCssMatStyler, MatNavList} from '@angular/material/list';
@@ -7,6 +8,9 @@ import {MatIcon} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {NgIf} from '@angular/common';
 import {filter} from 'rxjs';
+import { OAuthService } from 'angular-oauth2-oidc';
+import { authConfig } from './auth.config';
+import {AuthenticationService} from './services/authentication/authentication.service';
 
 @Component({
   selector: 'mitterlehner-root',
@@ -26,16 +30,17 @@ import {filter} from 'rxjs';
     NgIf,
   ],
   templateUrl: './app.component.html',
-  styles: [],
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   title = 'NextStop';
   pageTitle = '';
-  isAdmin = true; // TODO implement logic
 
   @ViewChild(MatSidenav) sidenav!: MatSidenav;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private authService: AuthenticationService) {
+    this.authService.configure();
+
     // Überwache die Route und aktualisiere den Titel
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
@@ -44,24 +49,41 @@ export class AppComponent {
       });
   }
 
+  login() {
+    this.authService.login();
+  }
+
+  logout() {
+    this.authService.logout();
+    this.authService.redirectToBaseUrl();
+  }
+
+  isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
+  }
+
+  getRole(): string | null {
+    return this.authService.getRole();
+  }
+
   // Methode zur Aktualisierung des Titels basierend auf der Route
   updatePageTitle() {
     const route = this.router.url;
-    if (route.includes('/admin/stops')) {
-      this.pageTitle = 'Admin Haltestellen';
-    } else if (route.includes('/admin/routes')) {
-      this.pageTitle = 'Admin Routen';
-    } else if (route.includes('/admin/holidays')) {
-      this.pageTitle = 'Admin Feiertage';
-    } else if (route.includes('/admin/statistics')) {
-      this.pageTitle = 'Admin Statistiken';
-    } else if (route.includes('/timetable')) {
-      this.pageTitle = 'Fahrplanabfrage';
-    } else if (route.includes('/stops')) {
-      this.pageTitle = 'Haltestellen';
-    } else if (route.includes('/dashboard')) {
-      this.pageTitle = 'Anzeigetafel';
 
+    if (route.includes('/' + ROUTES.ADMIN.STOPS)) {
+      this.pageTitle = 'Admin Haltestellen';
+    } else if (route.includes('/' + ROUTES.ADMIN.ROUTES)) {
+      this.pageTitle = 'Admin Routen';
+    } else if (route.includes('/' + ROUTES.ADMIN.HOLIDAYS)) {
+      this.pageTitle = 'Admin Feiertage';
+    } else if (route.includes('/' + ROUTES.STATISTICS)) {
+      this.pageTitle = 'Statistiken';
+    } else if (route.includes('/' + ROUTES.TIMETABLE)) {
+      this.pageTitle = 'Fahrplanabfrage';
+    } else if (route.includes('/' + ROUTES.STOPS)) {
+      this.pageTitle = 'Haltestellen';
+    } else if (route.includes('/' + ROUTES.DASHBOARD)) {
+      this.pageTitle = 'Anzeigetafel';
     } else {
       this.pageTitle = ''; // Fallback
     }
@@ -72,4 +94,6 @@ export class AppComponent {
       this.sidenav.toggle();
     }
   }
+
+  protected readonly ROUTES = ROUTES;
 }
